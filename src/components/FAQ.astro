@@ -10,11 +10,11 @@ const faqs = [
   },
   {
     question: "Обучаются ли модели на моих данных?",
-    answer: "Нет. Модели работают в режиме 'только чтение' (inference). Ваши документы и диалоги сохраняются в зашифрованную локальную базу данных на вашем диске и никогда никому не передаются."
+    answer: "Нет. Модели работают в режиме 'только чтение' (inference). Ваши документы и диалоги сохраняются в зашифрованную локальную базу данных на вашем диске и никому не передаются."
   },
   {
     question: "Какие форматы файлов поддерживаются?",
-    answer: "Система из коробки поддерживают PDF, DOCX, XLSX, CSV, TXT, Markdown и JSON. Вы можете загружать как отдельные файлы, так и целые папки с документами."
+    answer: "Система из коробки поддерживает PDF, DOCX, XLSX, CSV, TXT, Markdown и JSON. Вы можете загружать как отдельные файлы, так и целые папки с документами."
   }
 ];
 ---
@@ -32,7 +32,7 @@ const faqs = [
     </div>
 
     <div class="space-y-4">
-      {faqs.map((faq, index) => (
+      {faqs.map((faq) => (
         <details class="group p-6 rounded-2xl bg-slate-900 border border-slate-800 transition-all [&_summary::-webkit-details-marker]:hidden">
           <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-100 text-lg">
             <span>{faq.question}</span>

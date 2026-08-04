@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* По умолчанию скрываем элементы незадействованного режима */
 /* Глобальное переключение видимости элементов по выбору режима */
 html[data-mode="user"] .mode-dev {

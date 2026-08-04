@@ -1,9 +1,11 @@
 ---
-interface Props {
+import '../styles/global.css';
+
+export interface Props {
   title: string;
 }
 
-const { title } = Astro.props;
+const { title } = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -20,9 +22,10 @@ const { title } = Astro.props;
 
     <script>
       function initAnchorScroll() {
-        document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
-          anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
+        document.querySelectorAll<HTMLAnchorElement>('a[href*="#"]').forEach((anchor) => {
+          anchor.addEventListener('click', (e) => {
+            const targetAnchor = e.currentTarget as HTMLAnchorElement;
+            const href = targetAnchor.getAttribute('href');
             if (!href) return;
 
             const hashIndex = href.indexOf('#');
@@ -39,7 +42,6 @@ const { title } = Astro.props;
                 block: 'start'
               });
               
-              // Обновляем hash в адресной строке без перезагрузки
               history.pushState(null, '', `#${targetId}`);
             }
           });
@@ -58,7 +60,6 @@ const { title } = Astro.props;
 <style is:global>
   html {
     scroll-behavior: smooth;
-    /* Отступ сверху при прокрутке к якорю, чтобы фиксированная шапка не перекрывала заголовок */
     scroll-padding-top: 90px;
   }
 </style>
