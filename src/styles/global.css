@@ -1,9 +1,10 @@
 @import "tailwindcss";
 /* По умолчанию скрываем элементы незадействованного режима */
-html[data-mode="business"] .mode-dev {
+/* Глобальное переключение видимости элементов по выбору режима */
+html[data-mode="user"] .mode-dev {
   display: none !important;
 }
 
-html[data-mode="dev"] .mode-business {
+html[data-mode="dev"] .mode-user {
   display: none !important;
 }

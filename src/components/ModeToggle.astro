@@ -5,12 +5,12 @@
   <div class="bg-slate-900/90 backdrop-blur-xl p-1.5 rounded-full border border-slate-700/80 shadow-2xl shadow-emerald-950/50 flex items-center gap-1">
     
     <button
-      id="global-btn-business"
+      id="global-btn-user"
       type="button"
       class="mode-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer"
     >
-      <span>💼</span>
-      <span>Бизнес & Аналитика</span>
+      <span>👤</span>
+      <span>Пользователь</span>
     </button>
 
     <button
@@ -19,27 +19,27 @@
       class="mode-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer"
     >
       <span>🛠️</span>
-      <span>DevOps & Разработчик</span>
+      <span>Разработчик</span>
     </button>
 
   </div>
 </div>
 
 <script>
-  function setGlobalMode(mode: 'business' | 'dev') {
-    // 1. Устанавливаем data-mode на html
+  function setGlobalMode(mode: 'user' | 'dev') {
+    // 1. Устанавливаем data-mode на HTML
     document.documentElement.setAttribute('data-mode', mode);
     
-    // 2. Сохраняем в localStorage
+    // 2. Сохраняем выбор в localStorage
     localStorage.setItem('syrlas-mode', mode);
 
-    // 3. Обновляем стили кнопок
-    const btnBiz = document.getElementById('global-btn-business');
+    // 3. Переключаем подсветку кнопок
+    const btnUser = document.getElementById('global-btn-user');
     const btnDev = document.getElementById('global-btn-dev');
 
-    if (mode === 'business') {
-      btnBiz?.classList.add('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
-      btnBiz?.classList.remove('text-slate-400', 'hover:text-slate-200');
+    if (mode === 'user') {
+      btnUser?.classList.add('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
+      btnUser?.classList.remove('text-slate-400', 'hover:text-slate-200');
 
       btnDev?.classList.remove('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
       btnDev?.classList.add('text-slate-400', 'hover:text-slate-200');
@@ -47,16 +47,16 @@
       btnDev?.classList.add('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
       btnDev?.classList.remove('text-slate-400', 'hover:text-slate-200');
 
-      btnBiz?.classList.remove('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
-      btnBiz?.classList.add('text-slate-400', 'hover:text-slate-200');
+      btnUser?.classList.remove('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
+      btnUser?.classList.add('text-slate-400', 'hover:text-slate-200');
     }
   }
 
-  // Загрузка сохраненного режима при старте
-  const savedMode = (localStorage.getItem('syrlas-mode') as 'business' | 'dev') || 'business';
+  // При загрузке страницы читаем из localStorage (по умолчанию 'user')
+  const savedMode = (localStorage.getItem('syrlas-mode') as 'user' | 'dev') || 'user';
   setGlobalMode(savedMode);
 
-  // Слушатели событий
-  document.getElementById('global-btn-business')?.addEventListener('click', () => setGlobalMode('business'));
+  // Клики по кнопкам
+  document.getElementById('global-btn-user')?.addEventListener('click', () => setGlobalMode('user'));
   document.getElementById('global-btn-dev')?.addEventListener('click', () => setGlobalMode('dev'));
 </script>

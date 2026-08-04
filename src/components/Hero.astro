@@ -1,62 +1,61 @@
 ---
+const rawBase = import.meta.env.BASE_URL || '/';
+const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
 ---
-<section class="relative pt-12 pb-20 overflow-hidden bg-slate-950 border-b border-slate-800/80">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="max-w-3xl mx-auto text-center space-y-6">
-      
-      <div class="flex flex-wrap items-center justify-center gap-2">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-medium">
-          🇰🇿 НАЦИОНАЛЬНЫЙ ИИ-ПРОЕКТ • 0 ₸ SUB
-        </span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">
-          ⚡ .NET 8 Self-Contained Engine
-        </span>
-      </div>
 
-      <!-- Обновленный заголовок -->
-      <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-100 tracking-tight leading-tight">
-        Syrlas AI: Ваш автономный <br class="hidden sm:inline"/>
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-cyan-400 to-teal-300">
-          личный приватный советник
-        </span>
-      </h1>
-
-      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-left text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
-        <p>
-          📜 <strong class="text-slate-100">Историческая справка:</strong> В традициях Великой Степи термин <em class="text-emerald-400 font-semibold">«Сырлас»</em> обозначает верного спутника, доверенное лицо и хранителя сокровенных личных тайн. 
-          Платформа <strong>Syrlas AI</strong> воплощает этот принцип в цифровой среде: она бережет ваши коммерческие данные, документы и приватность.
-        </p>
-      </div>
-
-      <p class="text-slate-400 text-base sm:text-lg">
-        100% локальный инференс без передачи байта информации в сеть. От разбора делового казахского языка (<span class="text-emerald-400">QazaqTili Mentor</span>) до юридического RAG-анализа документов и ремонта техники.
-      </p>
-
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-        <button
-          onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))"
-          class="w-full sm:w-auto px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-base transition-all shadow-xl shadow-emerald-500/20 cursor-pointer flex items-center justify-center gap-2"
-        >
-          <span>Скачать Syrlas_AI_Setup.exe</span>
-          <span class="text-xs bg-slate-950/20 px-2 py-0.5 rounded font-mono">0 ₸</span>
-        </button>
-      </div>
-
-      <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-800/60 text-left">
-        <div>
-          <div class="text-xl sm:text-2xl font-bold text-emerald-400 font-mono">0 ₸</div>
-          <div class="text-xs text-slate-400 mt-0.5">Бессрочный доступ по программе</div>
-        </div>
-        <div>
-          <div class="text-xl sm:text-2xl font-bold text-cyan-400 font-mono">100% Air-Gap</div>
-          <div class="text-xs text-slate-400 mt-0.5">Изоляция через Kestrel (127.0.0.1)</div>
-        </div>
-        <div>
-          <div class="text-xl sm:text-2xl font-bold text-slate-200 font-mono">Offline</div>
-          <div class="text-xs text-slate-400 mt-0.5">Работает без подключения к сети</div>
-        </div>
-      </div>
-
+<section class="relative pt-20 pb-16 overflow-hidden bg-slate-950 border-b border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    
+    <!-- Бейдж: Режим Пользователь -->
+    <div class="mode-user inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium mb-6">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      100% Автономный ИИ-Ассистент на вашем ПК
     </div>
+
+    <!-- Бейдж: Режим Разработчик -->
+    <div class="mode-dev inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-6">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+      .NET 8 / C# 12 Self-Contained Engine (127.0.0.1)
+    </div>
+
+    <!-- Заголовок: Пользователь -->
+    <h1 class="mode-user text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 tracking-tight max-w-4xl mx-auto leading-tight">
+      Ваш личный ИИ-помощник, который умеет читать ваши документы
+    </h1>
+
+    <!-- Заголовок: Разработчик -->
+    <h1 class="mode-dev text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 font-mono tracking-tight max-w-5xl mx-auto leading-tight">
+      Syrlas AI Core: Local RAG & GGUF LLM Engine
+    </h1>
+
+    <!-- Описание: Пользователь -->
+    <p class="mode-user mt-6 text-base sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      Загружайте инструкции, договоры и отчеты. Задавайте вопросы человеческим языком и получайте мгновенные ответы строго по вашим файлам. Без интернета, подписок и риска утечки данных.
+    </p>
+
+    <!-- Описание: Разработчик -->
+    <p class="mode-dev mt-6 text-sm sm:text-base text-slate-400 font-mono max-w-3xl mx-auto leading-relaxed">
+      Автономный сервисный стек на базе Kestrel Web API, LLamaSharp (C++ Bindings), OnnxRuntime и sqlite-vec. Полная совместимость со спецификацией OpenAI API для интеграции с IDE и CRM.
+    </p>
+
+    <!-- Кнопки действия -->
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <button
+        type="button"
+        onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))"
+        class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm sm:text-base transition-all shadow-lg shadow-emerald-500/20 cursor-pointer"
+      >
+        Скачать программу (Бесплатно)
+      </button>
+
+      <a
+        href={`${base}/docs`}
+        class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-semibold text-sm transition-all cursor-pointer"
+      >
+        <span class="mode-user">📖 Инструкция по работе</span>
+        <span class="mode-dev font-mono">📖 API Documentation</span>
+      </a>
+    </div>
+
   </div>
 </section>

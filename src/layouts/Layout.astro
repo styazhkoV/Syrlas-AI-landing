@@ -12,7 +12,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth bg-slate-950 text-slate-100" data-mode="business">
+<html lang="ru" class="scroll-smooth bg-slate-950 text-slate-100" data-mode="user">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,10 +25,9 @@ const { title } = Astro.props;
       <slot />
     </main>
 
-    <!-- Глобальный плавающий тумблер -->
+    <!-- Плавающий тумблер управления режимом сайта -->
     <ModeToggle />
 
-    <!-- Модальное окно -->
     <FreeAccessModal client:load />
   </body>
 </html>
