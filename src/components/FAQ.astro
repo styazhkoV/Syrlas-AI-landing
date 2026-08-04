@@ -1,74 +1,45 @@
 ---
-const userFaqs = [
+const faqs = [
   {
-    q: "Почему Syrlas AI лучше обычного онлайн ИИ?",
-    a: "Обычный ИИ работает через интернет и передает ваши данные на чужие серверы. Syrlas AI — ваш персональный, полностью автономный хранитель информации. Он работает без интернета и читает только ваши документы."
+    question: "Нужен ли интернет для работы Syrlas AI?",
+    answer: "Нет, интернет не требуется абсолютно. Все нейросети, векторные базы данных и парсеры документов запускаются и исполняются локально на вашем компьютере."
   },
   {
-    q: "Как ИИ находит ответы в моих файлах?",
-    a: "При загрузке файла система за секунду выстраивает его 'смысловую карту'. Когда вы задаете вопрос, ИИ находит точный фрагмент текста и дает вам развернутый ответ со ссылкой на документ."
+    question: "Какие минимальные системные требования?",
+    answer: "Для комфортной работы достаточно ПК или ноутбука с 16 ГБ ОЗУ и современным процессором (Intel Core i5/i7, AMD Ryzen 5/7 или Apple Silicon M1/M2/M3). Наличие дискретной видеокарты ускоряет генерацию, но не является обязательным."
   },
   {
-    q: "Какие документы можно загружать?",
-    a: "Вы можете загружать PDF-документы, файлы Word (.docx), текстовые регламенты, договоры и инструкции любых объемов."
-  }
-];
-
-const devFaqs = [
-  {
-    q: "Как устроен локальный эндпоинт REST API?",
-    a: "Kestrel сервер предоставляет OpenAPI эндпоинт http://127.0.0.1:5000/v1/chat/completions с полной поддержкой стриминга (Server-Sent Events) и формата сообщений OpenAI."
+    question: "Обучаются ли модели на моих данных?",
+    answer: "Нет. Модели работают в режиме 'только чтение' (inference). Ваши документы и диалоги сохраняются в зашифрованную локальную базу данных на вашем диске и никогда никому не передаются."
   },
   {
-    q: "Как организовано векторное хранилище?",
-    a: "Используется встроенная библиотечная расширенная SQLite база данных с модулем sqlite-vec для быстрого cos-sim (косинусного) поиска векторных эмбеддингов 384d."
-  },
-  {
-    q: "Какие квантования GGUF поддерживаются?",
-    a: "Поддерживается большинство популярных моделей в форматах Q4_K_M, Q5_K_M и Q8_0 благодаря вызовам через LLamaSharp с CUDA/Vulkan акселерацией."
+    question: "Какие форматы файлов поддерживаются?",
+    answer: "Система из коробки поддерживают PDF, DOCX, XLSX, CSV, TXT, Markdown и JSON. Вы можете загружать как отдельные файлы, так и целые папки с документами."
   }
 ];
 ---
 
-<section id="faq" class="py-16 bg-slate-950 border-t border-slate-800/80">
+<section id="faq" class="py-20 bg-slate-950">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <div class="text-center mb-12">
-      <div class="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-2">FAQ</div>
-      
-      <h2 class="mode-user text-2xl sm:text-3xl font-extrabold text-slate-100">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-100 mb-4">
         Часто задаваемые вопросы
       </h2>
-      <h2 class="mode-dev text-2xl sm:text-3xl font-extrabold text-slate-100 font-mono">
-        Technical Specification & FAQ
-      </h2>
+      <p class="text-slate-400 text-base">
+        Ответы на популярные вопросы о безопасности, требованиях и внедрении.
+      </p>
     </div>
 
-    <!-- Вопросы: Пользователь -->
-    <div class="mode-user space-y-4">
-      {userFaqs.map((item) => (
-        <details class="group bg-slate-900/60 border border-slate-800 rounded-xl p-5 cursor-pointer">
-          <summary class="flex items-center justify-between font-bold text-slate-200 group-open:text-emerald-400 text-base">
-            <span>{item.q}</span>
-            <span class="text-slate-400 group-open:rotate-180 transition-transform">↓</span>
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details class="group p-6 rounded-2xl bg-slate-900 border border-slate-800 transition-all [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-100 text-lg">
+            <span>{faq.question}</span>
+            <span class="text-emerald-400 group-open:rotate-180 transition-transform">↓</span>
           </summary>
-          <p class="mt-4 text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-3">
-            {item.a}
-          </p>
-        </details>
-      ))}
-    </div>
-
-    <!-- Вопросы: Разработчик -->
-    <div class="mode-dev space-y-4 font-mono">
-      {devFaqs.map((item) => (
-        <details class="group bg-slate-900/60 border border-slate-800 rounded-xl p-5 cursor-pointer">
-          <summary class="flex items-center justify-between font-bold text-slate-200 group-open:text-cyan-400 text-sm">
-            <span>{item.q}</span>
-            <span class="text-slate-400 group-open:rotate-180 transition-transform">↓</span>
-          </summary>
-          <p class="mt-4 text-xs text-slate-300 leading-relaxed border-t border-slate-800 pt-3">
-            {item.a}
+          <p class="mt-4 text-slate-400 text-sm sm:text-base leading-relaxed">
+            {faq.answer}
           </p>
         </details>
       ))}

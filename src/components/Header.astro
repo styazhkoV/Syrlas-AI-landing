@@ -1,48 +1,96 @@
 ---
-const rawBase = import.meta.env.BASE_URL || '/';
-const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const navLinks = [
+  { name: "Возможности", href: `${baseUrl}/#capabilities` },
+  { name: "Безопасность", href: `${baseUrl}/#security` },
+  { name: "Сравнение", href: `${baseUrl}/#comparison` },
+  { name: "FAQ", href: `${baseUrl}/#faq` },
+];
 ---
 
-<header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    
-    <!-- Логотип -->
-    <a href={`${base}/`} class="flex items-center gap-2 group">
-      <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-extrabold text-lg group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all">
-        S
+<header class="sticky top-0 z-50 w-full bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Логотип -->
+      <a href={`${baseUrl}/`} class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-extrabold text-lg group-hover:scale-105 transition-transform">
+          S
+        </div>
+        <span class="text-xl font-bold text-slate-100 tracking-tight">
+          Syrlas <span class="text-emerald-400">AI</span>
+        </span>
+      </a>
+
+      <!-- Навигация (Desktop) -->
+      <nav class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors"
+          >
+            {link.name}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Действие -->
+      <div class="hidden md:flex items-center gap-4">
+        <a
+          href={`${baseUrl}/#security`}
+          class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/10"
+        >
+          Запросить демо
+        </a>
       </div>
-      <span class="font-bold text-slate-100 text-lg tracking-tight">Syrlas <span class="text-emerald-400">AI</span></span>
-    </a>
 
-    <!-- Навигация: Режим Пользователь -->
-    <nav class="mode-user hidden md:flex items-center gap-6 text-sm text-slate-300 font-medium">
-      <a href="#capabilities" class="hover:text-emerald-400 transition-colors">Возможности</a>
-      <a href="#use-cases" class="hover:text-emerald-400 transition-colors">Где применить</a>
-      <a href="#security" class="hover:text-emerald-400 transition-colors">Безопасность</a>
-      <a href="#comparison" class="hover:text-emerald-400 transition-colors">Сравнение</a>
-      <a href="#faq" class="hover:text-emerald-400 transition-colors">Частые вопросы</a>
-    </nav>
-
-    <!-- Навигация: Режим Разработчик -->
-    <nav class="mode-dev hidden md:flex items-center gap-6 text-xs font-mono text-slate-400">
-      <a href="#architecture" class="hover:text-cyan-400 transition-colors">/architecture</a>
-      <a href="#stack" class="hover:text-cyan-400 transition-colors">/tech-stack</a>
-      <a href="#security-spec" class="hover:text-cyan-400 transition-colors">/air-gap-spec</a>
-      <a href="#benchmarks" class="hover:text-cyan-400 transition-colors">/benchmarks</a>
-      <a href="#faq" class="hover:text-cyan-400 transition-colors">/api-docs</a>
-    </nav>
-
-    <!-- Кнопка вызова модального окна -->
-    <div>
+      <!-- Мобильное меню (кнопка) -->
       <button
+        id="mobile-menu-toggle"
         type="button"
-        onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))"
-        class="px-4 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/30 text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+        class="md:hidden p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-900"
+        aria-label="Открыть меню"
       >
-        <span class="mode-user">Скачать бесплатно</span>
-        <span class="mode-dev font-mono">Get Binary</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
       </button>
-    </div>
 
+    </div>
+  </div>
+
+  <!-- Выпадающее мобильное меню -->
+  <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-emerald-400 hover:bg-slate-800/50"
+      >
+        {link.name}
+      </a>
+    ))}
+    <a
+      href={`${baseUrl}/#security`}
+      class="block w-full text-center px-5 py-3 rounded-xl bg-emerald-500 text-slate-950 font-bold text-sm"
+    >
+      Запросить демо
+    </a>
   </div>
 </header>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  toggleBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Закрывать мобильное меню при клике на ссылку
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+</script>

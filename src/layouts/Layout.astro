@@ -1,9 +1,4 @@
 ---
-import Header from '../components/Header.astro';
-import ModeToggle from '../components/ModeToggle.astro';
-import FreeAccessModal from '../components/react/FreeAccessModal';
-import '../styles/global.css';
-
 interface Props {
   title: string;
 }
@@ -11,23 +6,59 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="ru" class="scroll-smooth bg-slate-950 text-slate-100" data-mode="user">
+<!doctype html>
+<html lang="ru" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Syrlas AI — Локальный ИИ-Ассистент для работы с данными без интернета" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen flex flex-col bg-slate-950 selection:bg-emerald-500/30 selection:text-emerald-300 pb-24">
-    <Header />
-    
-    <main class="flex-1">
-      <slot />
-    </main>
+  <body class="bg-slate-950 text-slate-100 antialiased overflow-x-clip min-h-screen flex flex-col">
+    <slot />
 
-    <!-- Плавающий тумблер управления режимом сайта -->
-    <ModeToggle />
+    <script>
+      function initAnchorScroll() {
+        document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
+          anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (!href) return;
 
-    <FreeAccessModal client:load />
+            const hashIndex = href.indexOf('#');
+            if (hashIndex === -1) return;
+
+            const targetId = href.substring(hashIndex + 1);
+            if (!targetId) return;
+
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              e.preventDefault();
+              targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+              
+              // Обновляем hash в адресной строке без перезагрузки
+              history.pushState(null, '', `#${targetId}`);
+            }
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAnchorScroll);
+      } else {
+        initAnchorScroll();
+      }
+    </script>
   </body>
 </html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+    /* Отступ сверху при прокрутке к якорю, чтобы фиксированная шапка не перекрывала заголовок */
+    scroll-padding-top: 90px;
+  }
+</style>

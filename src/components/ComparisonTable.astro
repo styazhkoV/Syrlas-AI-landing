@@ -1,85 +1,45 @@
----
----
-
-<section id="comparison" class="py-16 bg-slate-950 border-b border-slate-800/80">
+<section id="comparison" class="py-20 bg-slate-900/50 border-b border-slate-800/80">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <div class="text-center mb-12">
-      <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2">Comparison</div>
-      
-      <h2 class="mode-user text-2xl sm:text-3xl font-extrabold text-slate-100">
-        Сравнение с другими решениями
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-100 mb-4">
+        Syrlas AI vs Облачные нейросети
       </h2>
-      <h2 class="mode-dev text-2xl sm:text-3xl font-extrabold text-slate-100 font-mono">
-        Local Engine vs Cloud RAG SaaS
-      </h2>
+      <p class="text-slate-400 text-base sm:text-lg">
+        Почему локальная архитектура превосходит привычные облачные сервисы в корпоративном сегменте.
+      </p>
     </div>
 
-    <!-- Режим Пользователь -->
-    <div class="mode-user overflow-x-auto">
+    <!-- Таблица сравнения -->
+    <div class="overflow-x-auto">
       <table class="w-full text-left border-collapse min-w-[600px]">
         <thead>
           <tr class="border-b border-slate-800 text-slate-400 text-sm">
-            <th class="py-4 px-4 font-semibold">Критерий</th>
-            <th class="py-4 px-4 font-semibold text-emerald-400">Syrlas AI (На ПК)</th>
-            <th class="py-4 px-4 font-semibold">Облачный ChatGPT</th>
+            <th class="py-4 px-4 font-semibold">Параметр</th>
+            <th class="py-4 px-4 font-semibold text-emerald-400">Syrlas AI (Локально)</th>
+            <th class="py-4 px-4 font-semibold text-slate-500">Облачные ИИ (ChatGPT и др.)</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-800/60 text-sm">
           <tr>
-            <td class="py-4 px-4 text-slate-300 font-medium">Конфиденциальность файлов</td>
-            <td class="py-4 px-4 text-emerald-400 font-bold">100% Приватно (на ПК)</td>
-            <td class="py-4 px-4 text-slate-500">Отправляется на чужие серверы</td>
+            <td class="py-4 px-4 text-slate-200 font-medium">Передача данных вовне</td>
+            <td class="py-4 px-4 text-emerald-400 font-bold">0 байт (100% Локально)</td>
+            <td class="py-4 px-4 text-rose-400">Отправка на внешние серверы</td>
           </tr>
           <tr>
-            <td class="py-4 px-4 text-slate-300 font-medium">Работа без интернета</td>
-            <td class="py-4 px-4 text-emerald-400 font-bold">Да (в самолете, дороге, бункере)</td>
-            <td class="py-4 px-4 text-slate-500">Нет, требуется сеть</td>
+            <td class="py-4 px-4 text-slate-200 font-medium">Зависимость от интернета</td>
+            <td class="py-4 px-4 text-emerald-400 font-bold">Не требуется (Offline)</td>
+            <td class="py-4 px-4 text-rose-400">Обязательное подключение</td>
           </tr>
           <tr>
-            <td class="py-4 px-4 text-slate-300 font-medium">Стоимость использования</td>
-            <td class="py-4 px-4 text-emerald-400 font-bold">Бесплатно навсегда</td>
-            <td class="py-4 px-4 text-slate-500">Ежемесячная подписка</td>
+            <td class="py-4 px-4 text-slate-200 font-medium">Соответствие ПДн / NDA</td>
+            <td class="py-4 px-4 text-emerald-400 font-bold">Полное соответствие</td>
+            <td class="py-4 px-4 text-amber-400">Высокий риск утечек</td>
           </tr>
           <tr>
-            <td class="py-4 px-4 text-slate-300 font-medium">Поиск по тысячам страниц</td>
-            <td class="py-4 px-4 text-emerald-400 font-bold">Мгновенный локальный поиск</td>
-            <td class="py-4 px-4 text-slate-500">Ограничение на размер файлов</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Режим Разработчик -->
-    <div class="mode-dev overflow-x-auto font-mono text-xs">
-      <table class="w-full text-left border-collapse min-w-[600px]">
-        <thead>
-          <tr class="border-b border-slate-800 text-slate-400">
-            <th class="py-4 px-4 font-bold">Specification Matrix</th>
-            <th class="py-4 px-4 font-bold text-cyan-400">Syrlas AI Native Engine</th>
-            <th class="py-4 px-4 font-bold">Cloud API (OpenAI / Anthropic)</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-slate-800/60">
-          <tr>
-            <td class="py-4 px-4 text-slate-300">Data Sovereignty & Air-Gap</td>
-            <td class="py-4 px-4 text-cyan-400 font-bold">Strictly Local (127.0.0.1)</td>
-            <td class="py-4 px-4 text-slate-500">External Endpoint / Network Dependent</td>
-          </tr>
-          <tr>
-            <td class="py-4 px-4 text-slate-300">Vector Search Subsystem</td>
-            <td class="py-4 px-4 text-cyan-400 font-bold">sqlite-vec + FTS5 Hybrid Index</td>
-            <td class="py-4 px-4 text-slate-500">Cloud Vector DB / Remote Indexing</td>
-          </tr>
-          <tr>
-            <td class="py-4 px-4 text-slate-300">Inference Bindings</td>
-            <td class="py-4 px-4 text-cyan-400 font-bold">LLamaSharp (C++ Direct Bindings)</td>
-            <td class="py-4 px-4 text-slate-500">REST API Over HTTPS</td>
-          </tr>
-          <tr>
-            <td class="py-4 px-4 text-slate-300">API Compatibility</td>
-            <td class="py-4 px-4 text-cyan-400 font-bold">OpenAI Compliant (/v1/chat/completions)</td>
-            <td class="py-4 px-4 text-slate-500">Proprietary Formats</td>
+            <td class="py-4 px-4 text-slate-200 font-medium">Подписка и лимиты</td>
+            <td class="py-4 px-4 text-emerald-400 font-bold">Безлимитно на вашем ПК</td>
+            <td class="py-4 px-4 text-slate-400">Ежемесячная оплата за токен</td>
           </tr>
         </tbody>
       </table>
