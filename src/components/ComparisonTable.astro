@@ -1,0 +1,43 @@
+---
+const comparison = [
+  { feature: "Передача данных", cloud: "На зарубежные серверы (США/Китай)", syrlas: "100% Локально (127.0.0.1 / Air-Gap)", highlight: true },
+  { feature: "Закон о перс. данных РК", cloud: "Риск передачи за пределы РК", syrlas: "Полное соответствие (данные на ПК)", highlight: true },
+  { feature: "Работа без Интернета", cloud: "Невозможна", syrlas: "Полный Offline (0 байт в сеть)", highlight: false },
+  { feature: "Подписка и токены", cloud: "$20+/мес или лимиты API", syrlas: "0 ₸ / Разовое скачивание", highlight: false },
+  { feature: "RAG по локальным файлам", cloud: "Ограничен размером загрузки", syrlas: "Неограничен (sqlite-vec + ONNX)", highlight: false },
+];
+---
+
+<section class="py-16 bg-slate-950 border-t border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2">Why Syrlas AI?</div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Сравнение с облачными ИИ</h2>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse bg-slate-900/60 border border-slate-800 rounded-2xl">
+        <thead>
+          <tr class="border-b border-slate-800 bg-slate-950/80 text-xs font-mono text-slate-400">
+            <th class="p-4">Критерий</th>
+            <th class="p-4">Облачные ИИ (ChatGPT, Claude)</th>
+            <th class="p-4 text-emerald-400">Syrlas AI Desktop Engine</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800 text-xs sm:text-sm">
+          {comparison.map(row => (
+            <tr class="hover:bg-slate-900/80 transition-colors">
+              <td class="p-4 font-semibold text-slate-200">{row.feature}</td>
+              <td class="p-4 text-slate-400">{row.cloud}</td>
+              <td class={`p-4 font-bold ${row.highlight ? 'text-emerald-400' : 'text-slate-100'}`}>
+                {row.syrlas}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>

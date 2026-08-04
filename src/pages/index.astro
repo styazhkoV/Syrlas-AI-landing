@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Architecture from '../components/Architecture.astro';
+import UseCaseDiagram from '../components/UseCaseDiagram.astro';
+import TrustAndSecurity from '../components/TrustAndSecurity.astro';
+import UseCases from '../components/UseCases.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import Specs from '../components/Specs.astro';
+import FAQ from '../components/FAQ.astro';
+import FreeAccessModal from '../components/react/FreeAccessModal';
+---
+
+<Layout title="Syrlas AI Desktop Engine — Локальный ИИ-сейф (Air-Gap .NET 8)">
+	<!-- Шапка сайта -->
+	<Header />
+	
+	<main>
+		<!-- 1. Главный экран: Оффер, название Syrlas AI, CTA кнопки -->
+		<Hero />
+
+		<!-- 2. Стек и Архитектура: C#, .NET 8, LLamaSharp, sqlite-vec -->
+		<Architecture />
+
+		<!-- 3. Графическая Use Case Диаграмма (SVG + Air-Gap Boundary) -->
+		<UseCaseDiagram />
+
+		<!-- 4. Безопасность, Data Pipeline и Закон РК о Персональных данных -->
+		<TrustAndSecurity />
+
+		<!-- 5. Сценарии использования: Юристы, Гос.сектор, Разработчики -->
+		<UseCases />
+
+		<!-- 6. Сравнительная таблица: Syrlas AI vs Cloud LLMs (ChatGPT/Claude) -->
+		<ComparisonTable />
+
+		<!-- 7. Железо и Модели: Минимальные требования и Поддержка GGUF -->
+		<Specs />
+
+		<!-- 8. Вопросы и Ответы (FAQ) + REST API endpoint spec -->
+		<FAQ />
+	</main>
+	
+	<!-- Модальное окно получения офлайн-лицензии/скачивания -->
+	<FreeAccessModal client:only="react" />
+
+	<!-- Футер -->
+	<footer class="py-8 bg-slate-950 border-t border-slate-900 text-center text-xs text-slate-400 font-mono">
+		<div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+			<div>
+				<strong>Syrlas AI Desktop Engine</strong> • Air-Gap Local .NET 8 Stack
+			</div>
+			<div class="text-slate-400">
+				Алматы, Казахстан • Public Control Initiative
+			</div>
+		</div>
+	</footer>
+</Layout>

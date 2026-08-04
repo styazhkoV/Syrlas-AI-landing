@@ -1,0 +1,79 @@
+---
+const specs = [
+  { label: "Процессор (CPU)", min: "Intel Core i5 (8th Gen) / AMD Ryzen 5 (AVX2)", rec: "Intel Core i7/i9 (12th+ Gen) / AMD Ryzen 7/9" },
+  { label: "Оперативная память", min: "8 GB RAM", rec: "16 GB – 32 GB RAM (DDR4/DDR5)" },
+  { label: "Видеокарта (GPU)", min: "Интегрированная (CPU-only инференс)", rec: "NVIDIA RTX 3060+ (6GB+ VRAM) / Apple M-Series" },
+  { label: "Дисковое пространство", min: "10 GB SSD (для базовых GGUF)", rec: "25 GB+ NVMe SSD (для Qwen/Llama 7B-14B)" },
+  { label: "ОС & Среда", min: "Windows 10/11 x64, Linux (Ubuntu 22.04)", rec: "Windows 11 x64 (.NET 8 Runtime)" },
+];
+
+const models = [
+  { name: "Qwen 2.5 (QazaqTili Adapted)", size: "7B Q4_K_M", target: "Официальный казахский язык, гос. документы РК", tag: "В комплекте" },
+  { name: "Llama 3.1 Instruct", size: "8B Q4_K_M", target: "Аналитика, бизнес-логика, составление отчетов", tag: "Поддерживается" },
+  { name: "DeepSeek R1 / Qwen Coder", size: "7B-14B", target: "Написание кода, SQL-запросы, анализ DDL схем", tag: "Поддерживается" },
+];
+---
+
+<section class="py-16 bg-slate-950 border-t border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2">Hardware & AI Models</div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Системные требования и GGUF-модели</h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Таблица железа -->
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-slate-100 mb-4 flex items-center gap-2">
+          <span>💻</span> Требования к ПК
+        </h3>
+        <div class="space-y-4">
+          {specs.map(item => (
+            <div class="border-b border-slate-800/60 pb-3 last:border-0 last:pb-0">
+              <div class="text-xs font-mono text-slate-400 mb-1">{item.label}</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <div class="bg-slate-950 p-2 rounded border border-slate-800/50">
+                  <span class="text-slate-500 font-mono">Мин:</span> <span class="text-slate-300 font-medium">{item.min}</span>
+                </div>
+                <div class="bg-emerald-950/30 p-2 rounded border border-emerald-500/20">
+                  <span class="text-emerald-400 font-mono">Реком:</span> <span class="text-emerald-200 font-medium">{item.rec}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Список моделей -->
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-slate-100 mb-4 flex items-center gap-2">
+            <span>🧠</span> Поддерживаемые локальные модели
+          </h3>
+          <div class="space-y-3">
+            {models.map(m => (
+              <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-start justify-between gap-4">
+                <div>
+                  <div class="font-bold text-sm text-slate-100 flex items-center gap-2">
+                    {m.name}
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">{m.size}</span>
+                  </div>
+                  <div class="text-xs text-slate-400 mt-1">{m.target}</div>
+                </div>
+                <span class="text-[10px] font-mono shrink-0 px-2 py-1 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30">
+                  {m.tag}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-6 p-3 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-xs text-cyan-300 font-mono">
+          ℹ️ Вы можете подключать любые свои GGUF-модели простым переносом файла в папку `/models`.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

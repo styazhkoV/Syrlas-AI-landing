@@ -1,0 +1,50 @@
+---
+const faqs = [
+  {
+    q: "Нужен ли интернет после установки?",
+    a: "Нет. Интернет требуется исключительно для первой загрузки файла Syrlas_AI_Setup.exe. Далее движок работает полностью автономно (Air-Gap)."
+  },
+  {
+    q: "Совместим ли движок с VS Code / Obsidian?",
+    a: "Да! Syrlas AI предоставляет локальный REST API эндпоинт (http://localhost:5000/v1/chat/completions), полностью совместимый с форматом OpenAI API. Вы можете подключать его к Continue.dev или Obsidian."
+  },
+  {
+    q: "Насколько безопасны мои файлы?",
+    a: "На 100%. Индексация документов (PDF, DOCX) происходит через встроенные библиотеки PdfPig и sqlite-vec прямо в вашей оперативной памяти. Никакие метрики или текст не покидают ваше устройство."
+  }
+];
+---
+
+<section class="py-16 bg-slate-950 border-t border-slate-800/80">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center mb-12">
+      <div class="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-2">FAQ & Integrations</div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Часто задаваемые вопросы</h2>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map(item => (
+        <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-xl space-y-2">
+          <h3 class="font-bold text-slate-100 text-base flex items-center gap-2">
+            <span class="text-emerald-400 font-mono">Q:</span> {item.q}
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed pl-6">
+            {item.a}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- REST API Плашка -->
+    <div class="mt-8 p-4 rounded-xl bg-slate-900 border border-slate-800 font-mono text-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30">REST API</span>
+        <span class="text-slate-300">Local Endpoint:</span>
+        <code class="text-cyan-400">http://127.0.0.1:5000/v1</code>
+      </div>
+      <span class="text-slate-500 text-[11px]">OpenAI Spec Compatible</span>
+    </div>
+
+  </div>
+</section>

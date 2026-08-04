@@ -1,0 +1,74 @@
+---
+const dataPipeline = [
+  { step: "01", name: "Парсинг", tech: "PdfPig / OpenXml", desc: "Локальное чтение PDF/DOCX прямо в памяти" },
+  { step: "02", name: "Векторизация", tech: "OnnxRuntime", desc: "Генерация эмбеддингов моделью all-MiniLM-L6" },
+  { step: "03", name: "Индексация", tech: "sqlite-vec", desc: "Сохранение векторов в локальную базу на ПК" },
+  { step: "04", name: "Инференс", tech: "LLamaSharp", desc: "Формирование ответа через Qwen 2.5 / Llama 3" }
+];
+---
+
+<section class="py-16 bg-slate-950 border-t border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Заголовок -->
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2">Security & Data Pipeline</div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Безопасность и цепочка обработки данных</h2>
+    </div>
+
+    <!-- Data Pipeline визуализация -->
+    <div class="mb-12">
+      <div class="text-xs font-mono text-slate-400 mb-4 uppercase tracking-wider text-center">
+        ⚡ Поток обработки документа без выхода за пределы RAM/SSD:
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {dataPipeline.map(item => (
+          <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-xl relative overflow-hidden group hover:border-emerald-500/40 transition-all">
+            <div class="text-3xl font-mono font-black text-slate-800 absolute right-2 top-2 group-hover:text-emerald-500/20 transition-colors">
+              {item.step}
+            </div>
+            <div class="text-xs font-mono text-emerald-400 font-bold mb-1">{item.tech}</div>
+            <div class="text-sm font-bold text-slate-100 mb-2">{item.name}</div>
+            <p class="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Комплаенс и Юридическая безопасность -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl">⚖️</span>
+          <h3 class="text-base font-bold text-slate-100">Соответствие Законодательству РК</h3>
+        </div>
+        <ul class="space-y-3 text-xs text-slate-300">
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-400 font-bold">✓</span>
+            <span><strong>Закон РК «О персональных данных»:</strong> Полная локализация обработки. Данные граждан и компаний РК не передаются на зарубежные облака.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-400 font-bold">✓</span>
+            <span><strong>Zero Telemetry:</strong> Приложение не отправляет системные логи, аналитику или ошибки во внешние сервисы.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl">🤝</span>
+          <h3 class="text-base font-bold text-slate-100">Общественная инициатива (Public Control)</h3>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed mb-3">
+          Движок <strong>Syrlas AI</strong> разработан в рамках инициативы по предоставлению доступных и безопасных ИИ-инструментов для специалистов, аналитиков и экспертов Казахстана.
+        </p>
+        <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-[11px] font-mono text-emerald-400">
+          Бесплатная бессрочная лицензия для экспертного анализа и работы с государственными данными РК.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
