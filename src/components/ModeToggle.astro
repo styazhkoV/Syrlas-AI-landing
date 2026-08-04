@@ -1,56 +1,70 @@
 ---
 ---
 
-<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95vw]">
-  <div class="bg-slate-900/90 backdrop-blur-xl p-1.5 rounded-full border border-slate-700/80 shadow-2xl shadow-emerald-950/50 flex items-center gap-1">
-    
+<!-- Плавающий переключатель режимов -->
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+  <div class="inline-flex items-center p-1.5 rounded-full bg-slate-900/90 backdrop-blur-md border border-slate-700/80 shadow-2xl shadow-emerald-500/10">
     <button
-      id="global-btn-user"
+      id="global-mode-user-btn"
       type="button"
-      class="mode-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer"
+      class="px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 cursor-pointer bg-emerald-500 text-slate-950 shadow-md"
     >
-      <span>👤</span>
+      <span class="text-sm">👤</span>
       <span>Пользователь</span>
     </button>
-
     <button
-      id="global-btn-dev"
+      id="global-mode-dev-btn"
       type="button"
-      class="mode-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer"
+      class="px-4 py-2 rounded-full text-xs font-medium transition-all flex items-center gap-2 cursor-pointer text-slate-400 hover:text-slate-200"
     >
-      <span>🛠️</span>
+      <span class="text-sm">🛠️</span>
       <span>Разработчик</span>
     </button>
-
   </div>
 </div>
 
 <script>
-  function setGlobalMode(mode: 'user' | 'dev') {
-    document.documentElement.setAttribute('data-mode', mode);
-    localStorage.setItem('syrlas-mode', mode);
+  function initGlobalModeToggle() {
+    const userBtn = document.getElementById('global-mode-user-btn');
+    const devBtn = document.getElementById('global-mode-dev-btn');
 
-    const btnUser = document.getElementById('global-btn-user');
-    const btnDev = document.getElementById('global-btn-dev');
+    function setMode(isDev: boolean) {
+      if (isDev) {
+        document.body.classList.add('dev-mode');
+        
+        devBtn?.classList.remove('text-slate-400', 'hover:text-slate-200', 'font-medium');
+        devBtn?.classList.add('bg-emerald-500', 'text-slate-950', 'font-bold', 'shadow-md');
 
-    if (mode === 'user') {
-      btnUser?.classList.add('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
-      btnUser?.classList.remove('text-slate-400', 'hover:text-slate-200');
+        userBtn?.classList.remove('bg-emerald-500', 'text-slate-950', 'font-bold', 'shadow-md');
+        userBtn?.classList.add('text-slate-400', 'hover:text-slate-200', 'font-medium');
 
-      btnDev?.classList.remove('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
-      btnDev?.classList.add('text-slate-400', 'hover:text-slate-200');
-    } else {
-      btnDev?.classList.add('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
-      btnDev?.classList.remove('text-slate-400', 'hover:text-slate-200');
+        localStorage.setItem('syrlas_mode', 'dev');
+      } else {
+        document.body.classList.remove('dev-mode');
 
-      btnUser?.classList.remove('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/20');
-      btnUser?.classList.add('text-slate-400', 'hover:text-slate-200');
+        userBtn?.classList.remove('text-slate-400', 'hover:text-slate-200', 'font-medium');
+        userBtn?.classList.add('bg-emerald-500', 'text-slate-950', 'font-bold', 'shadow-md');
+
+        devBtn?.classList.remove('bg-emerald-500', 'text-slate-950', 'font-bold', 'shadow-md');
+        devBtn?.classList.add('text-slate-400', 'hover:text-slate-200', 'font-medium');
+
+        localStorage.setItem('syrlas_mode', 'user');
+      }
+    }
+
+    userBtn?.addEventListener('click', () => setMode(false));
+    devBtn?.addEventListener('click', () => setMode(true));
+
+    // Восстановление сохраненного режима при загрузке
+    const savedMode = localStorage.getItem('syrlas_mode');
+    if (savedMode === 'dev') {
+      setMode(true);
     }
   }
 
-  const savedMode = (localStorage.getItem('syrlas-mode') as 'user' | 'dev') || 'user';
-  setGlobalMode(savedMode);
-
-  document.getElementById('global-btn-user')?.addEventListener('click', () => setGlobalMode('user'));
-  document.getElementById('global-btn-dev')?.addEventListener('click', () => setGlobalMode('dev'));
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalModeToggle);
+  } else {
+    initGlobalModeToggle();
+  }
 </script>
