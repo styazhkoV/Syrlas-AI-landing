@@ -1,50 +1,272 @@
 ---
+const securitySlides = [
+  // --- СЛАЙД 1: ГЛАВНЫЙ ТЕЗИС (Из оригинального блока) ---
+  {
+    id: 1,
+    userBadge: "🛡️ Ваша коммерческая тайна под защитой",
+    userTitle: "Ни один байт вашей информации не покинет компьютер",
+    userDesc: "В отличие от обычных облачных нейросетей, Syrlas AI не использует сторонние серверы. Все алгоритмы, базы данных и текстовая аналитика работают локально. Вы можете полностью выключить Wi-Fi — программа продолжит работать в прежнем режиме.",
+    userPoints: [
+      "Без передачи файлов на серверы OpenAI или сторонних компаний",
+      "100% защита внутренних регламентов, договоров и персональных данных",
+      "Полная независимость от блокировок и отрезки от сети"
+    ],
+    devBadge: "🔒 Air-Gapped Security Profile",
+    devTitle: "Zero Telemetry & Closed Boundary Execution",
+    devDesc: "Архитектура изолирована в стеке Kestrel (127.0.0.1). Отсутствуют внешние HTTP-клиенты, аналитические трекеры и механизмы удаленной телеметрии.",
+    devPoints: [
+      "[Net-Rule]: Socket Listening constrained strictly to localhost loopback",
+      "[Storage]: AES-256 local DB encryption for document embeddings",
+      "[Memory]: Zero-Out volatile memory buffer allocation post-inference"
+    ]
+  },
+  // --- СЛАЙД 2: КЕЙС 1 (NDA) ---
+  {
+    id: 2,
+    userBadge: "🔒 Кейс 1: Работа с NDA и коммерческой тайной",
+    userTitle: "Анализ договоров и соглашений без риска утечки",
+    userDesc: "При загрузке финансовых соглашений, NDA и коммерческих офферов ни одна строчка текста не отправляется на внешние серверы. Вы можете анализировать риски в документах с полной уверенностью в сохранности тайны.",
+    userPoints: [
+      "Защита от передачи условий сделок сторонним нейросетям",
+      "Безопасная проверка юридических коллизий в текстах",
+      "Исключен риск попадания данных в публичные базы обучения"
+    ],
+    devBadge: "🛡️ Case 01: Zero Cloud Egress & Confidentiality",
+    devTitle: "Isolated In-Memory Document Ingestion Pipeline",
+    devDesc: "Парсинг и чанкинг строгих NDA/M&A документов происходит локально с использованием изолированных библиотек. Вызовы API к сторонним эндпоинтам отсутствуют.",
+    devPoints: [
+      "[Pipeline]: PdfPig & OpenXml memory stream parsing without disk cache",
+      "[Network]: Zero outbound traffic generated during RAG extraction",
+      "[Compliance]: Fully compliant with strict corporate confidentiality policies"
+    ]
+  },
+  // --- СЛАЙД 3: КЕЙС 2 (ПДн / HR) ---
+  {
+    id: 3,
+    userBadge: "👤 Кейс 2: Персональные данные (ПДн / HR)",
+    userTitle: "Обработка резюме, паспортов и кадровых приказов",
+    userDesc: "Кадровые службы и HR-отделы могут индексировать тысячи личных дел сотрудников, трудовых договоров и паспортов. Все данные хранятся на локальном диске ПК без нарушения законодательства о ПДн.",
+    userPoints: [
+      "Полное соответствие стандартам защиты персональных данных",
+      "Быстрый поиск квалификаций по базе резюме компании",
+      "Никаких рисков штрафов за утечку личной информации"
+    ],
+    devBadge: "🆔 Case 02: Local PII Compliance & Encryption",
+    devTitle: "Air-Gapped PII Storage with AES-256 Vector Store",
+    devDesc: "Локальная база данных SQLite и векторные индексы связываются с шифрованием на уровне файловой системы. Исключает несанкционированный доступ извне.",
+    devPoints: [
+      "[Database]: AES-256 encrypted SQLite & sqlite-vec engine",
+      "[GDPR/PII]: On-premise vector embeddings storage with no remote sync",
+      "[Sanitization]: Dynamic RAM zeroing after inference completion"
+    ]
+  },
+  // --- СЛАЙД 4: КЕЙС 3 (Air-Gap Объекты) ---
+  {
+    id: 4,
+    userBadge: "✈️ Кейс 3: Закрытые контуры и Air-Gap объекты",
+    userTitle: "Работа в бункерах, банках и закрытых производствах",
+    userDesc: "Syrlas AI создан для работы в условиях полной изоляции от внешнего мира. Приложение функционирует на объектах без подключения к сети Интернет или в изолированных корпоративных VPN.",
+    userPoints: [
+      "Автономная работа 24/7 без подключения Wi-Fi или Ethernet",
+      "Запуск на защищенных ноутбуках в командировках и полевых условиях",
+      "Устойчивость к обрывам связи и блокам внешних сервисов"
+    ],
+    devBadge: "🔌 Case 03: Loopback Bound Execution (127.0.0.1)",
+    devTitle: "Strict Air-Gap Environment Compatibility",
+    devDesc: "Kestrel Web API жестко залочен на адрес локальной петли (127.0.0.1). Отсутствуют сетевые сокеты, слушающие внешние интерфейсы (0.0.0.0).",
+    devPoints: [
+      "[Binding]: IPAddress.Loopback strict binding enforcement",
+      "[Dependencies]: All binaries (GGUF, ONNX models) embedded locally",
+      "[Air-Gap]: Passed offline strict perimeter verification"
+    ]
+  },
+  // --- СЛАЙД 5: КЕЙС 4 (Финансы) ---
+  {
+    id: 5,
+    userBadge: "📊 Кейс 4: Финансовый аудит и сверка бюджетов",
+    userTitle: "Мгновенный анализ отчетов и банковских выписок",
+    userDesc: "Финансовые аналитики и бухгалтеры могут безопасно загружать крупные годовые отчеты, налоговые декларации и аудиторские заключения для поиска расхождений и сведения таблиц.",
+    userPoints: [
+      "Локальное сведение сложных финансовых показателей",
+      "Безопасная сверка первичных документов и актов",
+      "Отсутствие ограничений на размер файлов и количество запросов"
+    ],
+    devBadge: "📈 Case 04: High-Density Context Vector Indexing",
+    devTitle: "Fast Local ONNX Embedding Generation for Financial RAG",
+    devDesc: "Генерация векторных представлений 384d моделью all-MiniLM-L6-v2 через C++ OnnxRuntime обеспечивает высокую скорость без использования сторонних API.",
+    devPoints: [
+      "[Embedding]: OnnxRuntime local execution (all-MiniLM-L6-v2)",
+      "[Speed]: ~15ms per chunk embedding on CPU / ~2ms on GPU",
+      "[Storage]: Cosine similarity retrieval over indexed FTS5 tables"
+    ]
+  },
+  // --- СЛАЙД 6: КЕЙС 5 (Интеллектуальная собственность) ---
+  {
+    id: 6,
+    userBadge: "💡 Кейс 5: Защита интеллектуальной собственности",
+    userTitle: "Работа с патентами, исходным кодом и чертежами",
+    userDesc: "R&D отделы и инженеры могут использовать Syrlas AI для поиска по внутренним техническим регламентам, патентам и документации без риска раскрытия коммерческих разработок.",
+    userPoints: [
+      "Полная защита уникальных инженерных решений и ноу-хау",
+      "Быстрая навигация по стандартам ГОСТ, ISO и ТУ",
+      "Создание закрытой базы знаний предприятия за 5 минут"
+    ],
+    devBadge: "🧠 Case 05: IP & Source Code Isolation Boundary",
+    devTitle: "Zero-Knowledge In-Memory LLM Inference Context",
+    devDesc: "Локальный инференс квантованных GGUF моделей через C++ bindings (LLamaSharp) гарантирует, что промпты и исходный контекст мгновенно стираются из памяти после генерации.",
+    devPoints: [
+      "[Inference]: LLamaSharp (Q4_K_M / Q8_0 GGUF execution)",
+      "[Zero-Log]: Prompts and retrieved chunks are never persisted to disk logs",
+      "[Isolation]: Complete isolation from public model retraining pipelines"
+    ]
+  }
+];
 ---
 
 <section id="security" class="py-16 bg-slate-950 border-b border-slate-800/80">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/20 border border-slate-800 relative overflow-hidden">
+    <!-- Карточка слайдера безопасности -->
+    <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/20 border border-slate-800 relative overflow-hidden shadow-2xl">
       
-      <div class="max-w-3xl relative z-10">
-        <!-- Режим Пользователь -->
-        <div class="mode-user">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium mb-4">
-            🛡️ Ваша коммерческая тайна под защитой
+      <!-- Контейнер слайдов -->
+      <div id="security-slider-container" class="relative min-h-[340px] sm:min-h-[290px]">
+        {securitySlides.map((item, index) => (
+          <div
+            class={`security-slide transition-all duration-500 ease-in-out ${index === 0 ? 'opacity-100 relative z-10 pointer-events-auto' : 'opacity-0 absolute inset-0 z-0 pointer-events-none'}`}
+            data-slide-index={index}
+          >
+            <div class="max-w-4xl">
+              
+              <!-- РЕЖИМ: ПОЛЬЗОВАТЕЛЬ -->
+              <div class="mode-user">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium mb-4">
+                  {item.userBadge}
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-100 mb-4 leading-tight">
+                  {item.userTitle}
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                  {item.userDesc}
+                </p>
+                <ul class="space-y-2 text-sm text-slate-300">
+                  {item.userPoints.map((point) => (
+                    <li class="flex items-start gap-2">
+                      <span class="text-emerald-400 font-bold">✓</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- РЕЖИМ: РАЗРАБОТЧИК -->
+              <div class="mode-dev font-mono">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs mb-4">
+                  {item.devBadge}
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100 mb-4 leading-tight">
+                  {item.devTitle}
+                </h2>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+                  {item.devDesc}
+                </p>
+                <div class="space-y-2 text-xs text-slate-400">
+                  {item.devPoints.map((point) => (
+                    <div><span class="text-cyan-400">{point.split(':')[0]}:</span>{point.substring(point.indexOf(':') + 1)}</div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
           </div>
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-100 mb-4">
-            Ни один байт вашей информации не покинет компьютер
-          </h2>
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-            В отличие от обычных облачных нейросетей, Syrlas AI не использует сторонние серверы. Все алгоритмы, базы данных и текстовая аналитика работают локально. Вы можете полностью выключить Wi-Fi — программа продолжит работать в прежнем режиме.
-          </p>
-          <ul class="space-y-2 text-sm text-slate-300">
-            <li class="flex items-center gap-2">✓ Без передачи файлов на серверы OpenAI или сторонних компаний</li>
-            <li class="flex items-center gap-2">✓ 100% защита внутренних регламентов, договоров и персональных данных</li>
-            <li class="flex items-center gap-2">✓ Полная независимость от блокировок и отрезки от сети</li>
-          </ul>
+        ))}
+      </div>
+
+      <!-- Элементы управления (Стрелки и Индикаторы) -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-20">
+        
+        <!-- Индикаторы (Dots) -->
+        <div class="flex items-center gap-2" id="slider-dots">
+          {securitySlides.map((_, index) => (
+            <button
+              type="button"
+              class={`dot-btn w-3 h-3 rounded-full transition-all cursor-pointer ${index === 0 ? 'bg-emerald-500 w-8' : 'bg-slate-700 hover:bg-slate-500'}`}
+              data-dot-index={index}
+              aria-label={`Go to slide ${index + 1}`}
+            ></button>
+          ))}
         </div>
 
-        <!-- Режим Разработчик -->
-        <div class="mode-dev font-mono">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs mb-4">
-            🔒 Air-Gapped Security Profile
-          </div>
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-100 mb-4">
-            Zero Telemetry & Closed Boundary Execution
-          </h2>
-          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
-            Архитектура изолирована в стеке Kestrel (127.0.0.1). Отсутствуют внешние HTTP-клиенты, аналитические трекеры и механизмы удаленной телеметрии.
-          </p>
-          <div class="space-y-2 text-xs text-slate-400">
-            <div><span class="text-cyan-400">[Net-Rule]:</span> Socket Listening constrained strictly to localhost loopback</div>
-            <div><span class="text-cyan-400">[Storage]:</span> AES-256 local DB encryption for document embeddings</div>
-            <div><span class="text-cyan-400">[Memory]:</span> Zero-Out volatile memory buffer allocation post-inference</div>
-          </div>
+        <!-- Кнопки Назад / Вперед -->
+        <div class="flex items-center gap-3">
+          <button
+            id="prev-slide-btn"
+            type="button"
+            class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-sm font-semibold transition-all flex items-center gap-1 cursor-pointer"
+          >
+            ← <span class="mode-user">Назад</span><span class="mode-dev font-mono">Prev</span>
+          </button>
+
+          <span class="text-xs font-mono text-slate-500" id="slide-counter">
+            01 / 06
+          </span>
+
+          <button
+            id="next-slide-btn"
+            type="button"
+            class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/10 flex items-center gap-1 cursor-pointer"
+          >
+            <span class="mode-user">Вперед</span><span class="mode-dev font-mono">Next</span> →
+          </button>
         </div>
+
       </div>
 
     </div>
 
   </div>
 </section>
+
+<script>
+  let currentSlide = 0;
+  const totalSlides = 6;
+
+  const slides = document.querySelectorAll('.security-slide');
+  const dots = document.querySelectorAll('.dot-btn');
+  const counter = document.getElementById('slide-counter');
+
+  function updateSlider(index: number) {
+    currentSlide = (index + totalSlides) % totalSlides;
+
+    slides.forEach((slide, i) => {
+      if (i === currentSlide) {
+        slide.classList.remove('opacity-0', 'absolute', 'inset-0', 'pointer-events-none', 'z-0');
+        slide.classList.add('opacity-100', 'relative', 'z-10', 'pointer-events-auto');
+      } else {
+        slide.classList.remove('opacity-100', 'relative', 'z-10', 'pointer-events-auto');
+        slide.classList.add('opacity-0', 'absolute', 'inset-0', 'pointer-events-none', 'z-0');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      if (i === currentSlide) {
+        dot.classList.add('bg-emerald-500', 'w-8');
+        dot.classList.remove('bg-slate-700');
+      } else {
+        dot.classList.remove('bg-emerald-500', 'w-8');
+        dot.classList.add('bg-slate-700');
+      }
+    });
+
+    if (counter) {
+      counter.textContent = `0${currentSlide + 1} / 0${totalSlides}`;
+    }
+  }
+
+  document.getElementById('prev-slide-btn')?.addEventListener('click', () => updateSlider(currentSlide - 1));
+  document.getElementById('next-slide-btn')?.addEventListener('click', () => updateSlider(currentSlide + 1));
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => updateSlider(index));
+  });
+</script>
