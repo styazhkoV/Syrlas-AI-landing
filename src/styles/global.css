@@ -1,1 +1,9 @@
 @import "tailwindcss";
+/* По умолчанию скрываем элементы незадействованного режима */
+html[data-mode="business"] .mode-dev {
+  display: none !important;
+}
+
+html[data-mode="dev"] .mode-business {
+  display: none !important;
+}

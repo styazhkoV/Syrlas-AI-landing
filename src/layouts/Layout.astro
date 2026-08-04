@@ -1,5 +1,6 @@
 ---
 import Header from '../components/Header.astro';
+import ModeToggle from '../components/ModeToggle.astro';
 import FreeAccessModal from '../components/react/FreeAccessModal';
 import '../styles/global.css';
 
@@ -11,20 +12,23 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth bg-slate-950 text-slate-100">
+<html lang="ru" class="scroll-smooth bg-slate-950 text-slate-100" data-mode="business">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen flex flex-col bg-slate-950 selection:bg-emerald-500/30 selection:text-emerald-300">
+  <body class="min-h-screen flex flex-col bg-slate-950 selection:bg-emerald-500/30 selection:text-emerald-300 pb-24">
     <Header />
     
     <main class="flex-1">
       <slot />
     </main>
 
-    <!-- client:load критически важен, чтобы React слушал события окна -->
+    <!-- Глобальный плавающий тумблер -->
+    <ModeToggle />
+
+    <!-- Модальное окно -->
     <FreeAccessModal client:load />
   </body>
 </html>
