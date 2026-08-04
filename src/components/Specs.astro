@@ -1,58 +1,56 @@
 ---
-// Данные для Пользователя
 const userSpecs = [
   {
     icon: "🔒",
-    title: "Полная приватность",
-    desc: "Все ваши файлы обрабатываются только внутри вашего компьютера. Никто со стороны не увидит ваши данные."
+    title: "100% Приватность и тайна",
+    desc: "Ваши файлы обрабатываются строго на вашем компьютере. Никакого отправки данных в облака или третьим лицам."
   },
   {
     icon: "⚡",
-    title: "Быстрый поиск в PDF и Word",
-    desc: "ИИ находит нужный пункт или ответ в документе на 100 страниц всего за 1 секунду."
+    title: "Мгновенный поиск ответов",
+    desc: "Забудьте про листание сотен страниц. ИИ за 1 секунду найдет нужную цитату или пункт в PDF и Word файлах."
   },
   {
-    icon: "🔌",
-    title: "Работа без интернета",
-    desc: "Программа полностью автономна. Работает в дороге, самолете или в закрытых офисах без сети."
+    icon: "✈️",
+    title: "Полная автономность",
+    desc: "Работает абсолютно без доступа к интернету — в дороге, самолете или в помещениях с закрытой сетью."
   },
   {
     icon: "📂",
-    title: "Удобные базы знаний",
-    desc: "Делите документы по папкам: «Юриспруденция», «Бухгалтерия» или «Инструкции» и переключайтесь в 1 клик."
+    title: "Базы знаний по папкам",
+    desc: "Разделяйте документы по темам («Юристам», «Бухгалтерии», «Проектам») и переключайте контекст в 1 клик."
   },
   {
     icon: "💰",
     title: "Без ежемесячной платы",
-    desc: "Вы не платите за количество вопросов или объемы загруженных файлов. Приложение полностью бесплатно."
+    desc: "Вы не платите за количество вопросов или размер загружаемых книг. Приложение полностью бесплатно."
   }
 ];
 
-// Данные для Разработчика
 const devSpecs = [
   {
     tech: ".NET 8 / C# 12",
-    sub: "ASP.NET Core Minimal API / Kestrel Web API (127.0.0.1)",
+    sub: "ASP.NET Core Minimal API / Kestrel Web API (127.0.0.1:5000)",
     icon: "⚡"
   },
   {
-    tech: "LLamaSharp",
-    sub: "C++ Native Bindings / GGUF Local LLM Inference",
+    tech: "LLamaSharp Engine",
+    sub: "C++ Native Bindings / GGUF Local LLM Inference (CUDA / Vulkan)",
     icon: "🧠"
   },
   {
     tech: "sqlite-vec & Dapper",
-    sub: "Векторный & Текстовый RAG-поиск в локальной БД",
+    sub: "Гибридный векторный + FTS5 полнотекстовый поиск в локальной SQLite",
     icon: "📦"
   },
   {
-    tech: "OnnxRuntime",
-    sub: "Генерация векторных эмбеддингов (all-MiniLM-L6-v2)",
+    tech: "OnnxRuntime Embeddings",
+    sub: "Генерация 384d векторных эмбеддингов (all-MiniLM-L6-v2)",
     icon: "🎯"
   },
   {
     tech: "PdfPig & OpenXml",
-    sub: "Локальный парсинг и чанкинг PDF / DOCX документов",
+    sub: "Локальный парсинг и структурированный чанкинг PDF / DOCX",
     icon: "📄"
   }
 ];
@@ -65,14 +63,14 @@ const devSpecs = [
       <div class="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">Capabilities</div>
       
       <h2 class="mode-user text-2xl sm:text-3xl font-extrabold text-slate-100">
-        Почему это удобно и надежно
+        Возможности и преимущества
       </h2>
       <h2 class="mode-dev text-2xl sm:text-3xl font-extrabold text-slate-100 font-mono">
-        Локальная бэкенд-архитектура
+        Архитектурный стек и модули
       </h2>
     </div>
 
-    <!-- Карточки: Режим Пользователь -->
+    <!-- Режим Пользователь -->
     <div class="mode-user grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {userSpecs.map((item) => (
         <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all">
@@ -83,7 +81,7 @@ const devSpecs = [
       ))}
     </div>
 
-    <!-- Карточки: Режим Разработчик -->
+    <!-- Режим Разработчик -->
     <div class="mode-dev grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 font-mono">
       {devSpecs.map((item) => (
         <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all">

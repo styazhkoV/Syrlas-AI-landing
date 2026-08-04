@@ -27,13 +27,9 @@
 
 <script>
   function setGlobalMode(mode: 'user' | 'dev') {
-    // 1. Устанавливаем data-mode на HTML
     document.documentElement.setAttribute('data-mode', mode);
-    
-    // 2. Сохраняем выбор в localStorage
     localStorage.setItem('syrlas-mode', mode);
 
-    // 3. Переключаем подсветку кнопок
     const btnUser = document.getElementById('global-btn-user');
     const btnDev = document.getElementById('global-btn-dev');
 
@@ -52,11 +48,9 @@
     }
   }
 
-  // При загрузке страницы читаем из localStorage (по умолчанию 'user')
   const savedMode = (localStorage.getItem('syrlas-mode') as 'user' | 'dev') || 'user';
   setGlobalMode(savedMode);
 
-  // Клики по кнопкам
   document.getElementById('global-btn-user')?.addEventListener('click', () => setGlobalMode('user'));
   document.getElementById('global-btn-dev')?.addEventListener('click', () => setGlobalMode('dev'));
 </script>

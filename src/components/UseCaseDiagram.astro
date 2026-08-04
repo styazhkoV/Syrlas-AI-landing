@@ -1,159 +1,34 @@
 ---
 ---
-<section class="py-16 bg-slate-950 border-t border-slate-800/80">
+
+<section class="py-16 bg-slate-950 border-b border-slate-800/80">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <!-- Заголовок с увеличенным отступом mb-12 -->
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2">UML Architecture & Use Cases</div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Подробная карта сценариев использования (Use Cases)</h2>
-      <p class="text-xs sm:text-sm text-slate-400 mt-2 font-mono">
-        Демонстрация абсолютной изоляции данных (Air-Gap) внутри контура вашей рабочей станции.
-      </p>
-    </div>
-
-    <!-- Контейнер для SVG с фиксированной пропорцией -->
-    <div class="w-full overflow-x-auto bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" class="w-full h-auto min-w-[850px] text-xs font-mono">
-        <defs>
-          <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#0f172a" />
-            <stop offset="100%" stop-color="#020617" />
-          </linearGradient>
-
-          <!-- Маркер для стрелок include -->
-          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
-          </marker>
-          
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-
-        <!-- Граница Air-Gap (Системный контур ПК) -->
-        <rect x="230" y="20" width="530" height="680" rx="16" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="2" />
-        <rect x="240" y="30" width="510" height="660" rx="12" fill="none" stroke="#10b981" stroke-dasharray="6,6" stroke-opacity="0.4" />
-        <text x="260" y="55" fill="#10b981" font-weight="bold" font-size="11">🛡️ LOCAL AIR-GAP BOUNDARY (127.0.0.1 / KESTREL SERVER)</text>
-
-        <!-- ВНЕШНИЙ МИР (БЛОКИРОВКА СЕТИ) -->
-        <g transform="translate(790, 300)">
-          <rect x="0" y="0" width="180" height="130" rx="12" fill="#0f172a" stroke="#ef4444" stroke-width="1.5" />
-          <text x="90" y="30" fill="#ef4444" text-anchor="middle" font-weight="bold" font-size="11">🌐 Внешняя сеть</text>
-          <text x="90" y="48" fill="#ef4444" text-anchor="middle" font-size="10">(Cloud / ChatGPT / APIs)</text>
-          <line x1="20" y1="65" x2="160" y2="65" stroke="#334155" />
-          <text x="90" y="88" fill="#94a3b8" text-anchor="middle" font-size="10">⛔ Все подключения</text>
-          <text x="90" y="106" fill="#ef4444" text-anchor="middle" font-weight="bold" font-size="10">ЗАБЛОКИРОВАНЫ</text>
-        </g>
-
-        <!-- АКТОРЫ (Слева) -->
-        <!-- Юрист / Аналитик -->
-        <g transform="translate(50, 150)">
-          <circle cx="40" cy="25" r="18" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
-          <path d="M 40 43 L 40 85 M 20 58 L 60 58 M 40 85 L 20 120 M 40 85 L 60 120" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" />
-          <text x="40" y="142" fill="#f8fafc" text-anchor="middle" font-weight="bold" font-size="12">Юрист / Аналитик</text>
-          <text x="40" y="158" fill="#64748b" text-anchor="middle" font-size="10">(B2B User)</text>
-        </g>
-
-        <!-- Разработчик / ИТ-Специалист -->
-        <g transform="translate(50, 440)">
-          <circle cx="40" cy="25" r="18" fill="#1e293b" stroke="#34d399" stroke-width="2" />
-          <path d="M 40 43 L 40 85 M 20 58 L 60 58 M 40 85 L 20 120 M 40 85 L 60 120" stroke="#34d399" stroke-width="2" stroke-linecap="round" />
-          <text x="40" y="142" fill="#f8fafc" text-anchor="middle" font-weight="bold" font-size="12">ИТ-Специалист</text>
-          <text x="40" y="158" fill="#64748b" text-anchor="middle" font-size="10">(Developer / SysAdmin)</text>
-        </g>
-
-        <!-- USE CASES (Аккуратное вертикальное распределение) -->
-        
-        <!-- UC1: RAG анализ -->
-        <g transform="translate(260, 80)">
-          <ellipse cx="120" cy="30" rx="110" ry="26" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
-          <text x="120" y="27" fill="#f8fafc" text-anchor="middle" font-weight="bold" font-size="11">UC-1: RAG-анализ файлов РК</text>
-          <text x="120" y="42" fill="#94a3b8" text-anchor="middle" font-size="9">(PDF, DOCX ➔ sqlite-vec)</text>
-        </g>
-
-        <!-- UC2: QazaqTili Mentor -->
-        <g transform="translate(260, 170)">
-          <ellipse cx="120" cy="30" rx="110" ry="26" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
-          <text x="120" y="27" fill="#f8fafc" text-anchor="middle" font-weight="bold" font-size="11">UC-2: QazaqTili Mentor</text>
-          <text x="120" y="42" fill="#94a3b8" text-anchor="middle" font-size="9">(Составление писем на гос. языке)</text>
-        </g>
-
-        <!-- UC3: Центральное ядро - Offline LLM Инференс -->
-        <g transform="translate(480, 290)">
-          <ellipse cx="125" cy="35" rx="115" ry="32" fill="#064e3b" stroke="#10b981" stroke-width="2" filter="url(#glow)" />
-          <text x="125" y="30" fill="#34d399" text-anchor="middle" font-weight="bold" font-size="11">UC-3: Offline LLM Инференс</text>
-          <text x="125" y="46" fill="#a7f3d0" text-anchor="middle" font-size="9">(LLamaSharp + Qwen / Llama 3)</text>
-        </g>
-
-        <!-- UC4: REST API Интеграция -->
-        <g transform="translate(260, 430)">
-          <ellipse cx="120" cy="30" rx="110" ry="26" fill="#1e293b" stroke="#34d399" stroke-width="1.5" />
-          <text x="120" y="27" fill="#f8fafc" text-anchor="middle" font-weight="bold" font-size="11">UC-4: REST API Интеграция</text>
-          <text x="120" y="42" fill="#94a3b8" text-anchor="middle" font-size="9">(VS Code / Obsidian ➔ LocalHost)</text>
-        </g>
-
-        <!-- UC5: Анализ SQL / DDL -->
-        <g transform="translate(260, 520)">
-          <ellipse cx="120" cy="30" rx="110" ry="26" fill="#1e293b" stroke="#34d399" stroke-width="1.5" />
-          <text x="120" y="27" fill="#f8fafc" text-anchor="middle" font-weight="bold" font-size="11">UC-5: Анализ SQL / DDL Схем</text>
-          <text x="120" y="42" fill="#94a3b8" text-anchor="middle" font-size="9">(Генерация безопасных запросов)</text>
-        </g>
-
-        <!-- UC6: Local Embeddings -->
-        <g transform="translate(480, 610)">
-          <ellipse cx="120" cy="30" rx="110" ry="26" fill="#1e293b" stroke="#0ea5e9" stroke-width="1.5" />
-          <text x="120" y="27" fill="#f8fafc" text-anchor="middle" font-weight="bold" font-size="11">UC-6: Local Embeddings</text>
-          <text x="120" y="42" fill="#94a3b8" text-anchor="middle" font-size="9">(OnnxRuntime: all-MiniLM-L6)</text>
-        </g>
-
-        <!-- СВЯЗИ АКТОРОВ С USE CASES -->
-        <line x1="110" y1="200" x2="260" y2="110" stroke="#38bdf8" stroke-width="1.5" />
-        <line x1="110" y1="200" x2="260" y2="200" stroke="#38bdf8" stroke-width="1.5" />
-
-        <line x1="110" y1="490" x2="260" y2="460" stroke="#34d399" stroke-width="1.5" />
-        <line x1="110" y1="490" x2="260" y2="550" stroke="#34d399" stroke-width="1.5" />
-
-        <!-- ИСПРАВЛЕННЫЕ ПУНКТИРНЫЕ СТРЕЛКИ <<include>> БЕЗ ПЕРЕСЕЧЕНИЙ -->
-        
-        <!-- UC1 ➔ UC3 -->
-        <path d="M 470 110 C 530 110, 560 210, 580 280" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)" />
-        <text x="535" y="170" fill="#94a3b8" font-size="9" font-weight="bold">&lt;&lt;include&gt;&gt;</text>
-
-        <!-- UC2 ➔ UC3 -->
-        <path d="M 470 200 C 510 200, 530 240, 550 280" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)" />
-        <text x="495" y="235" fill="#94a3b8" font-size="9" font-weight="bold">&lt;&lt;include&gt;&gt;</text>
-
-        <!-- UC4 ➔ UC3 -->
-        <path d="M 470 450 C 520 450, 550 410, 570 365" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)" />
-        <text x="510" y="420" fill="#94a3b8" font-size="9" font-weight="bold">&lt;&lt;include&gt;&gt;</text>
-
-        <!-- UC1 ➔ UC6 (Векторизация) -->
-        <path d="M 480 90 C 720 90, 720 580, 610 620" fill="none" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)" />
-        <text x="670" y="340" fill="#0ea5e9" font-size="9" font-weight="bold">&lt;&lt;include&gt;&gt;</text>
-
-        <!-- БЛОКИРОВКА СЕТИ (Линия блокировки к Cloud) -->
-        <line x1="760" y1="365" x2="790" y2="365" stroke="#ef4444" stroke-width="3" stroke-dasharray="3,3" />
-        <circle cx="775" cy="365" r="11" fill="#ef4444" />
-        <text x="775" y="370" fill="#ffffff" text-anchor="middle" font-weight="bold" font-size="12">✕</text>
-      </svg>
-    </div>
-
-    <!-- Пояснительная легенда схемы -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 text-xs font-mono">
-      <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800 flex items-center gap-3">
-        <span class="w-3 h-3 rounded-full bg-emerald-500 shrink-0"></span>
-        <span class="text-slate-300">100% Локальный инференс в контуре (Air-Gap)</span>
+    <div class="p-8 rounded-2xl bg-slate-900/40 border border-slate-800">
+      
+      <!-- Режим Пользователь -->
+      <div class="mode-user text-center max-w-2xl mx-auto">
+        <h3 class="text-xl font-bold text-slate-100 mb-4">Простой диалог с вашими документами</h3>
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-300 py-6 border-y border-slate-800">
+          <div class="bg-slate-900 px-4 py-3 rounded-xl border border-slate-800">📁 Загрузка PDF/Word</div>
+          <div>➔</div>
+          <div class="bg-slate-900 px-4 py-3 rounded-xl border border-slate-800">💬 Ваш вопрос</div>
+          <div>➔</div>
+          <div class="bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 px-4 py-3 rounded-xl font-semibold">💡 Точный ответ с цитатой</div>
+        </div>
+        <p class="text-xs text-slate-400 mt-4">Вся цепочка выполняется полностью внутри вашей операционной системы.</p>
       </div>
-      <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800 flex items-center gap-3">
-        <span class="w-3 h-3 rounded-full bg-sky-400 shrink-0"></span>
-        <span class="text-slate-300">Векторизация через OnnxRuntime & sqlite-vec</span>
+
+      <!-- Режим Разработчик -->
+      <div class="mode-dev font-mono text-xs">
+        <div class="text-cyan-400 font-bold mb-4">// RAG Context Retrieval Sequence</div>
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-slate-400">
+          <div><span class="text-emerald-400">UserQuery</span> -> [Embedder: ONNX MiniLM] -> <span class="text-slate-200">384d Dense Vector</span></div>
+          <div><span class="text-emerald-400">Vector</span> -> [SQLite Vector Extension] -> <span class="text-slate-200">Top-K Chunks (Cosine Similarity)</span></div>
+          <div><span class="text-emerald-400">Chunks + Prompt</span> -> [Kestrel API] -> [LLamaSharp Engine] -> <span class="text-cyan-400">Stream Output (SSE)</span></div>
+        </div>
       </div>
-      <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800 flex items-center gap-3">
-        <span class="w-3 h-3 rounded-full bg-rose-500 shrink-0"></span>
-        <span class="text-slate-300">Заблокированный внешний трафик в интернет</span>
-      </div>
+
     </div>
 
   </div>

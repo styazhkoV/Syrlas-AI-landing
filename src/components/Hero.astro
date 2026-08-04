@@ -6,21 +6,24 @@ const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
 <section class="relative pt-20 pb-16 overflow-hidden bg-slate-950 border-b border-slate-800/80">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
     
-    <!-- Бейдж: Режим Пользователь -->
-    <div class="mode-user inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium mb-6">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      100% Автономный ИИ-Ассистент на вашем ПК
+    <!-- Легенда бренда Syrlas AI (Пользователь) -->
+    <div class="mode-user max-w-2xl mx-auto mb-8 p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/20 backdrop-blur-sm">
+      <div class="flex items-center justify-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-widest mb-1.5">
+        <span>✨</span> Легенда названия
+      </div>
+      <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+        «Сырлас» в переводе с казахского — это <strong class="text-emerald-400 font-semibold">душевный собеседник и хранитель тайн</strong>, которому можно доверить самое сокровенное. В эпоху облаков Syrlas AI становится вашим личным, преданным советником, который хранит все секреты и документы исключительно внутри вашего устройства.
+      </p>
     </div>
 
-    <!-- Бейдж: Режим Разработчик -->
-    <div class="mode-dev inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-6">
-      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-      .NET 8 / C# 12 Self-Contained Engine (127.0.0.1)
+    <!-- Легенда названия (Разработчик) -->
+    <div class="mode-dev max-w-2xl mx-auto mb-8 p-3 rounded-2xl bg-slate-900 border border-slate-800 font-mono text-xs">
+      <span class="text-cyan-400 font-bold">[Syrlas AI Origin]:</span> Sovereign Privacy Local Advisor. Олицетворение философии Air-Gap и недублируемого локального контура (127.0.0.1).
     </div>
 
     <!-- Заголовок: Пользователь -->
     <h1 class="mode-user text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 tracking-tight max-w-4xl mx-auto leading-tight">
-      Ваш личный ИИ-помощник, который умеет читать ваши документы
+      Ваш личный ИИ-помощник, которому можно доверить любые документы
     </h1>
 
     <!-- Заголовок: Разработчик -->
@@ -29,13 +32,13 @@ const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
     </h1>
 
     <!-- Описание: Пользователь -->
-    <p class="mode-user mt-6 text-base sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-      Загружайте инструкции, договоры и отчеты. Задавайте вопросы человеческим языком и получайте мгновенные ответы строго по вашим файлам. Без интернета, подписок и риска утечки данных.
+    <p class="mode-user mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      Загружайте отчеты, инструкции и договоры. Задавайте вопросы обычным языком и получайте точные ответы строго по содержимому ваших файлов. Без интернета, подписок и риска утечки коммерческих данных.
     </p>
 
     <!-- Описание: Разработчик -->
     <p class="mode-dev mt-6 text-sm sm:text-base text-slate-400 font-mono max-w-3xl mx-auto leading-relaxed">
-      Автономный сервисный стек на базе Kestrel Web API, LLamaSharp (C++ Bindings), OnnxRuntime и sqlite-vec. Полная совместимость со спецификацией OpenAI API для интеграции с IDE и CRM.
+      Изолированный сервисный стек на базе Kestrel Web API, LLamaSharp (C++ Bindings), OnnxRuntime и sqlite-vec. Совместимость со спецификацией OpenAI API для интеграции с IDE, CRM и автоматизациями.
     </p>
 
     <!-- Кнопки действия -->

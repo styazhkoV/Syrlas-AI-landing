@@ -1,70 +1,46 @@
 ---
-const dataPipeline = [
-  { step: "01", name: "Парсинг", tech: "PdfPig / OpenXml", desc: "Локальное чтение PDF/DOCX прямо в памяти" },
-  { step: "02", name: "Векторизация", tech: "OnnxRuntime", desc: "Генерация эмбеддингов моделью all-MiniLM-L6" },
-  { step: "03", name: "Индексация", tech: "sqlite-vec", desc: "Сохранение векторов в локальную базу на ПК" },
-  { step: "04", name: "Инференс", tech: "LLamaSharp", desc: "Формирование ответа через Qwen 2.5 / Llama 3" }
-];
 ---
 
-<section class="py-16 bg-slate-950 border-t border-slate-800/80">
+<section id="security" class="py-16 bg-slate-950 border-b border-slate-800/80">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <!-- Заголовок -->
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2">Security & Data Pipeline</div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Безопасность и цепочка обработки данных</h2>
-    </div>
-
-    <!-- Data Pipeline визуализация -->
-    <div class="mb-12">
-      <div class="text-xs font-mono text-slate-400 mb-4 uppercase tracking-wider text-center">
-        ⚡ Поток обработки документа без выхода за пределы RAM/SSD:
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {dataPipeline.map(item => (
-          <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-xl relative overflow-hidden group hover:border-emerald-500/40 transition-all">
-            <div class="text-3xl font-mono font-black text-slate-800 absolute right-2 top-2 group-hover:text-emerald-500/20 transition-colors">
-              {item.step}
-            </div>
-            <div class="text-xs font-mono text-emerald-400 font-bold mb-1">{item.tech}</div>
-            <div class="text-sm font-bold text-slate-100 mb-2">{item.name}</div>
-            <p class="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- Комплаенс и Юридическая безопасность -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/20 border border-slate-800 relative overflow-hidden">
       
-      <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-2xl">⚖️</span>
-          <h3 class="text-base font-bold text-slate-100">Соответствие Законодательству РК</h3>
+      <div class="max-w-3xl relative z-10">
+        <!-- Режим Пользователь -->
+        <div class="mode-user">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium mb-4">
+            🛡️ Ваша коммерческая тайна под защитой
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-100 mb-4">
+            Ни один байт вашей информации не покинет компьютер
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            В отличие от обычных облачных нейросетей, Syrlas AI не использует сторонние серверы. Все алгоритмы, базы данных и текстовая аналитика работают локально. Вы можете полностью выключить Wi-Fi — программа продолжит работать в прежнем режиме.
+          </p>
+          <ul class="space-y-2 text-sm text-slate-300">
+            <li class="flex items-center gap-2">✓ Без передачи файлов на серверы OpenAI или сторонних компаний</li>
+            <li class="flex items-center gap-2">✓ 100% защита внутренних регламентов, договоров и персональных данных</li>
+            <li class="flex items-center gap-2">✓ Полная независимость от блокировок и отрезки от сети</li>
+          </ul>
         </div>
-        <ul class="space-y-3 text-xs text-slate-300">
-          <li class="flex items-start gap-2">
-            <span class="text-emerald-400 font-bold">✓</span>
-            <span><strong>Закон РК «О персональных данных»:</strong> Полная локализация обработки. Данные граждан и компаний РК не передаются на зарубежные облака.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-emerald-400 font-bold">✓</span>
-            <span><strong>Zero Telemetry:</strong> Приложение не отправляет системные логи, аналитику или ошибки во внешние сервисы.</span>
-          </li>
-        </ul>
-      </div>
 
-      <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-2xl">🤝</span>
-          <h3 class="text-base font-bold text-slate-100">Общественная инициатива (Public Control)</h3>
-        </div>
-        <p class="text-xs text-slate-300 leading-relaxed mb-3">
-          Движок <strong>Syrlas AI</strong> разработан в рамках инициативы по предоставлению доступных и безопасных ИИ-инструментов для специалистов, аналитиков и экспертов Казахстана.
-        </p>
-        <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-[11px] font-mono text-emerald-400">
-          Бесплатная бессрочная лицензия для экспертного анализа и работы с государственными данными РК.
+        <!-- Режим Разработчик -->
+        <div class="mode-dev font-mono">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs mb-4">
+            🔒 Air-Gapped Security Profile
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-100 mb-4">
+            Zero Telemetry & Closed Boundary Execution
+          </h2>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+            Архитектура изолирована в стеке Kestrel (127.0.0.1). Отсутствуют внешние HTTP-клиенты, аналитические трекеры и механизмы удаленной телеметрии.
+          </p>
+          <div class="space-y-2 text-xs text-slate-400">
+            <div><span class="text-cyan-400">[Net-Rule]:</span> Socket Listening constrained strictly to localhost loopback</div>
+            <div><span class="text-cyan-400">[Storage]:</span> AES-256 local DB encryption for document embeddings</div>
+            <div><span class="text-cyan-400">[Memory]:</span> Zero-Out volatile memory buffer allocation post-inference</div>
+          </div>
         </div>
       </div>
 
