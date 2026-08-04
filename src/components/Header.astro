@@ -1,33 +1,121 @@
 ---
+// Безопасное получение базового URL
+const rawBase = import.meta.env.BASE_URL || '/';
+const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
 ---
-<header class="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+
+<header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80 transition-all pointer-events-auto">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
     
+    <!-- Логотип -->
+    <a href={`${base}/`} class="flex items-center gap-2.5 group cursor-pointer">
+      <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-extrabold text-lg group-hover:scale-105 transition-transform">
+        S
+      </div>
+      <span class="font-bold text-slate-100 text-lg tracking-tight group-hover:text-emerald-400 transition-colors">
+        Syrlas <span class="text-emerald-400 font-mono text-xs px-1.5 py-0.5 rounded bg-emerald-950 border border-emerald-800/50">AI</span>
+      </span>
+    </a>
+
+    <!-- Навигация (Desktop) -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+      <a href={`${base}/#specs`} class="hover:text-emerald-400 transition-colors cursor-pointer">
+        Характеристики
+      </a>
+      <a href={`${base}/#use-cases`} class="hover:text-emerald-400 transition-colors cursor-pointer">
+        Архитектура UML
+      </a>
+      <a href={`${base}/#comparison`} class="hover:text-emerald-400 transition-colors cursor-pointer">
+        Сравнение
+      </a>
+      
+      <div class="h-4 w-px bg-slate-800"></div>
+
+      <!-- Документация -->
+      <a href={`${base}/docs`} class="flex items-center gap-1.5 text-slate-300 hover:text-emerald-400 transition-colors cursor-pointer">
+        <span>📖 Документация</span>
+      </a>
+    </nav>
+
+    <!-- Правый блок: GitHub + CTA + Мобильное меню -->
     <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 p-0.5 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-        <div class="w-full h-full bg-slate-950 rounded-[7px] flex items-center justify-center">
-          <span class="font-mono font-black text-emerald-400 text-lg">S</span>
-        </div>
-      </div>
-      <div>
-        <div class="font-bold text-slate-100 leading-none flex items-center gap-2">
-          Syrlas AI <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30">v2.6</span>
-        </div>
-        <div class="text-[10px] font-mono text-slate-400 mt-0.5">Desktop Engine (.NET 8)</div>
-      </div>
+      
+      <!-- GitHub -->
+      <a
+        href="https://github.com/styazhkoV/Syrlas-AI-landing"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub Repository"
+        class="hidden sm:flex items-center justify-center p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-900 border border-slate-800 transition-all cursor-pointer"
+      >
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </a>
+
+      <!-- Кнопка Скачать -->
+      <button
+        type="button"
+        onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))"
+        class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs sm:text-sm transition-all shadow-md shadow-emerald-500/10 cursor-pointer relative z-10"
+      >
+        Скачать (0 ₸)
+      </button>
+
+      <!-- Мобильная кнопка -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle Menu"
+        class="md:hidden p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-900 border border-slate-800 transition-all cursor-pointer"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
     </div>
 
-    <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span class="text-slate-300">Air-Gap Active:</span>
-      <span class="text-cyan-400">127.0.0.1:5000</span>
-    </div>
+  </div>
 
-    <button
-      onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))"
-      class="px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all shadow-md shadow-emerald-500/20 active:scale-95 cursor-pointer"
+  <!-- Мобильное меню -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6 space-y-3">
+    <a href={`${base}/#specs`} class="mobile-link block text-sm text-slate-300 hover:text-emerald-400 py-1">
+      Характеристики
+    </a>
+    <a href={`${base}/#use-cases`} class="mobile-link block text-sm text-slate-300 hover:text-emerald-400 py-1">
+      Архитектура UML
+    </a>
+    <a href={`${base}/#comparison`} class="mobile-link block text-sm text-slate-300 hover:text-emerald-400 py-1">
+      Сравнение
+    </a>
+    <div class="h-px bg-slate-800 my-2"></div>
+    <a href={`${base}/docs`} class="mobile-link block text-sm text-slate-300 hover:text-emerald-400 py-1">
+      📖 Документация
+    </a>
+    <a 
+      href="https://github.com/styazhkoV/Syrlas-AI-landing" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="block text-sm text-slate-400 hover:text-slate-100 py-1"
     >
-      Скачать (0 ₸)
-    </button>
+      🐙 GitHub Репозиторий
+    </a>
   </div>
 </header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const links = document.querySelectorAll('.mobile-link');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+    });
+  });
+</script>

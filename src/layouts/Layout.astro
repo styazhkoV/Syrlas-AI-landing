@@ -1,26 +1,30 @@
 ---
+import Header from '../components/Header.astro';
+import FreeAccessModal from '../components/react/FreeAccessModal';
 import '../styles/global.css';
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="ru" class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Syrlas AI Desktop Engine — Автономная ИИ-платформа (100% Air-Gap / Offline) на .NET 8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-		<title>{title}</title>
-	</head>
-	<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-300 min-h-screen">
-		<slot />
-	</body>
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth bg-slate-950 text-slate-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-slate-950 selection:bg-emerald-500/30 selection:text-emerald-300">
+    <Header />
+    
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- client:load критически важен, чтобы React слушал события окна -->
+    <FreeAccessModal client:load />
+  </body>
 </html>
